@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recognition Invitation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffb6d9 0%, #ffc0cb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #ff69b4;
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+        }
+
+        .no-btn {
+            background: linear-gradient(135deg, #ffc0cb, #ffb6d9);
+            color: #ff69b4;
+            flex: 1;
+            min-width: 100px;
+            border: 2px solid #ff69b4;
+        }
+
+        .no-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+        }
+
+        .success {
+            font-size: 48px;
+            color: #ff69b4;
+            margin: 20px 0;
+            animation: bounce 0.6s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-btn {
+            background: linear-gradient(135deg, #ffc0cb, #ffb6d9);
+            color: #ff69b4;
+            border: 2px solid #ff69b4;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+        }
+
+        .special-btn {
+            background: linear-gradient(135deg, #90EE90, #7CFC00) !important;
+            color: #000 !important;
+            border: 2px solid #228B22 !important;
+        }
+
+        .special-btn:hover {
+            background: linear-gradient(135deg, #7CFC00, #90EE90) !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="initialPrompt">
+            <h1>Would you go to my recognition?? 🎉</h1>
+            <div class="buttons">
+                <button class="yes-btn" onclick="showSuccess()">Yes</button>
+                <button class="no-btn" onclick="showOptions()">No</button>
+            </div>
+        </div>
+
+        <div id="successMessage" class="hidden">
+            <div class="success">YAAAYYY!! :3</div>
+            <p style="font-size: 24px; color: #ff69b4; margin-top: 20px;">I can't wait to see you there! 💕</p>
+        </div>
+
+        <div id="optionsPrompt" class="hidden">
+            <h1>Are you sure?</h1>
+            <div class="options-container">
+                <button class="option-btn" onclick="updateQuestion('Are you really sure?')">Are you really sure?</button>
+                <button class="option-btn" onclick="updateQuestion('baby, please')">baby, please</button>
+                <button class="option-btn" onclick="updateQuestion('aaa don\'t do dis to me')">aaa don't do dis to me</button>
+                <button class="option-btn" onclick="updateQuestion('no way u\'re breaking my heart !!!')">no way u're breaking my heart !!!</button>
+                <button class="option-btn special-btn" onclick="showSuccess()">YES YOU WILL</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSuccess() {
+            document.getElementById('initialPrompt').classList.add('hidden');
+            document.getElementById('optionsPrompt').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+        }
+
+        function showOptions() {
+            document.getElementById('initialPrompt').classList.add('hidden');
+            document.getElementById('optionsPrompt').classList.remove('hidden');
+        }
+
+        function updateQuestion(question) {
+            document.querySelector('#optionsPrompt h1').textContent = question;
+        }
+    </script>
+</body>
+</html>
