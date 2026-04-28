@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recognition Prompt</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 40px;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        #yesBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #yesBtn:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #noBtn:hover {
+            background-color: #da190b;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+        }
+
+        .secondary-btn {
+            background-color: #ff9800;
+            color: white;
+            padding: 12px 20px;
+            font-size: 1em;
+        }
+
+        .secondary-btn:hover {
+            background-color: #e68900;
+            transform: scale(1.05);
+        }
+
+        .secondary-btn:active {
+            transform: scale(0.95);
+        }
+
+        .success-message {
+            font-size: 3em;
+            color: #4CAF50;
+            animation: scaleIn 0.6s ease-in-out;
+        }
+
+        .secondary-question {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 30px;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        #noBtn.move {
+            position: relative;
+            animation: moveAway 0.5s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes moveAway {
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(20px, -20px);
+            }
+            50% {
+                transform: translate(-20px, 20px);
+            }
+            75% {
+                transform: translate(20px, 20px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .celebration {
+            font-size: 2em;
+            animation: spin 0.6s ease-in-out;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="mainQuestion">
+            <h1>Would you go to my recognition???</h1>
+            <div class="button-container">
+                <button id="yesBtn">Yes</button>
+                <button id="noBtn">No</button>
+            </div>
+        </div>
+
+        <div id="successMessage" class="hidden">
+            <div class="success-message">YAAAYYY!! :3</div>
+            <div class="celebration">🎉✨💝</div>
+        </div>
+
+        <div id="secondaryQuestion" class="hidden">
+            <div class="secondary-question" id="questionText"></div>
+            <div class="button-container">
+                <button class="secondary-btn" onclick="nextQuestion()">YES</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            "Are you sure?",
+            "Are you really sure?",
+            "baby, please",
+            "aaa don't do dis to me",
+            "no way u're breaking my heart !!!",
+            "YES"
+        ];
+
+        let questionIndex = 0;
+
+        document.getElementById('yesBtn').addEventListener('click', function() {
+            document.getElementById('mainQuestion').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+            playConfetti();
+        });
+
+        document.getElementById('noBtn').addEventListener('click', function() {
+            showSecondaryQuestion();
+        });
+
+        function showSecondaryQuestion() {
+            document.getElementById('mainQuestion').classList.add('hidden');
+            document.getElementById('secondaryQuestion').classList.remove('hidden');
+            document.getElementById('questionText').textContent = questions[questionIndex];
+        }
+
+        function nextQuestion() {
+            questionIndex++;
+
+            if (questionIndex < questions.length - 1) {
+                document.getElementById('questionText').textContent = questions[questionIndex];
+            } else {
+                document.getElementById('secondaryQuestion').classList.add('hidden');
+                document.getElementById('successMessage').classList.remove('hidden');
+                playConfetti();
+            }
+        }
+
+        function playConfetti() {
+            // Simple confetti effect using Unicode characters
+            const confettiChars = ['🎉', '✨', '💝', '🎊', '⭐', '💫', '🌟'];
+            const container = document.querySelector('.container');
+
+            for (let i = 0; i < 20; i++) {
+                const confetti = document.createElement('div');
+                confetti.textContent = confettiChars[Math.floor(Math.random() * confettiChars.length)];
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = '-20px';
+                confetti.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                confetti.style.opacity = '1';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.animation = `fall ${Math.random() * 2 + 2}s linear forwards`;
+
+                document.body.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), (Math.random() * 2 + 2) * 1000);
+            }
+        }
+
+        // Add CSS animation for falling confetti
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(${window.innerHeight + 50}px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
