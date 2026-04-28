@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recognition Invitation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffc0cb, #ffb6d9);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question {
+            font-size: 28px;
+            color: #ff1493;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .yes-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .yes-btn:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .no-btn {
+            background-color: #ff6b9d;
+            color: white;
+        }
+
+        .no-btn:hover {
+            background-color: #ff1493;
+            transform: scale(1.05);
+        }
+
+        .special-btn {
+            background-color: #9C27B0;
+            color: white;
+        }
+
+        .special-btn:hover {
+            background-color: #7b1fa2;
+            transform: scale(1.05);
+        }
+
+        .success {
+            font-size: 48px;
+            color: #ff1493;
+            animation: bounce 0.5s ease-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Stage 1: Initial Question -->
+        <div id="stage1" class="stage">
+            <div class="question">Will you go to my recognition?</div>
+            <div class="buttons">
+                <button class="yes-btn" onclick="goToStage2()">Yes</button>
+                <button class="no-btn" onclick="goToStage3()">No</button>
+            </div>
+        </div>
+
+        <!-- Stage 2: Success -->
+        <div id="stage2" class="stage hidden">
+            <div class="success">YAAAYYY!! :3</div>
+        </div>
+
+        <!-- Stage 3: Are you sure? -->
+        <div id="stage3" class="stage hidden">
+            <div class="question">Are you sure?</div>
+            <div class="buttons">
+                <button class="yes-btn" onclick="goToStage4()">Yes</button>
+            </div>
+        </div>
+
+        <!-- Stage 4: Are you really sure? -->
+        <div id="stage4" class="stage hidden">
+            <div class="question">Are you really sure?</div>
+            <div class="buttons">
+                <button class="yes-btn" onclick="goToStage5()">Yes I am</button>
+            </div>
+        </div>
+
+        <!-- Stage 5: Baby, please -->
+        <div id="stage5" class="stage hidden">
+            <div class="question">baby, please</div>
+            <div class="buttons">
+                <button class="special-btn" onclick="goToStage6()">What?</button>
+            </div>
+        </div>
+
+        <!-- Stage 6: aaa don't do dis to me -->
+        <div id="stage6" class="stage hidden">
+            <div class="question">aaa don't do dis to me</div>
+            <div class="buttons">
+                <button class="special-btn" onclick="goToStage7()">Do what?</button>
+            </div>
+        </div>
+
+        <!-- Stage 7: no way u're breaking my heart !!! -->
+        <div id="stage7" class="stage hidden">
+            <div class="question">no way u're breaking my heart !!!</div>
+            <div class="buttons">
+                <button class="special-btn" onclick="goToStage8()">FINE I WILL COME</button>
+            </div>
+        </div>
+
+        <!-- Stage 8: YES YOU WILL -->
+        <div id="stage8" class="stage hidden">
+            <div class="question">YES YOU WILL</div>
+            <div class="buttons">
+                <button class="yes-btn" onclick="goToStage9()">YES YES FINE I WILL</button>
+            </div>
+        </div>
+
+        <!-- Stage 9: Final Success -->
+        <div id="stage9" class="stage hidden">
+            <div class="success">YAAAYYY!! :3</div>
+        </div>
+    </div>
+
+    <script>
+        function hideAllStages() {
+            const stages = document.querySelectorAll('.stage');
+            stages.forEach(stage => stage.classList.add('hidden'));
+        }
+
+        function goToStage2() {
+            hideAllStages();
+            document.getElementById('stage2').classList.remove('hidden');
+        }
+
+        function goToStage3() {
+            hideAllStages();
+            document.getElementById('stage3').classList.remove('hidden');
+        }
+
+        function goToStage4() {
+            hideAllStages();
+            document.getElementById('stage4').classList.remove('hidden');
+        }
+
+        function goToStage5() {
+            hideAllStages();
+            document.getElementById('stage5').classList.remove('hidden');
+        }
+
+        function goToStage6() {
+            hideAllStages();
+            document.getElementById('stage6').classList.remove('hidden');
+        }
+
+        function goToStage7() {
+            hideAllStages();
+            document.getElementById('stage7').classList.remove('hidden');
+        }
+
+        function goToStage8() {
+            hideAllStages();
+            document.getElementById('stage8').classList.remove('hidden');
+        }
+
+        function goToStage9() {
+            hideAllStages();
+            document.getElementById('stage9').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
